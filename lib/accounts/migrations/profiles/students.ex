@@ -1,8 +1,8 @@
-defmodule Accounts.Migration.Profiles do
+defmodule Accounts.Migrations.Profiles.Students do
   use Ecto.Migration
 
-  def change(table_name \\ :profiles) do
-    create table(table_name) do
+  def change do
+    create table(:students) do
       add :first_name, :string
       add :last_name, :string
       add :father_name, :string
@@ -14,7 +14,7 @@ defmodule Accounts.Migration.Profiles do
       timestamps()
     end
 
-    create index(table_name, [:address_id])
-    create unique_index(table_name, :user_id)
+    create index(:students, [:address_id])
+    create unique_index(:students, :user_id)
   end
 end

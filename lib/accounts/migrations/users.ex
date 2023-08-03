@@ -1,8 +1,8 @@
-defmodule Accounts.Migration.Users do
+defmodule Accounts.Migrations.Users do
   use Ecto.Migration
 
   def change do
-    execute("CREATE EXTENSION IF NOT EXISTS citext", "")
+    execute "CREATE EXTENSION IF NOT EXISTS citext", ""
 
     create table(:users) do
       add :username, :citext, null: false

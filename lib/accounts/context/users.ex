@@ -1,8 +1,9 @@
 defmodule Accounts.Context.Users do
   import Ecto.Query, warn: false
 
-  alias Accounts.Schema.User
+  alias Accounts.Schema.Permission.Role
   alias Accounts.Repo
+  alias Accounts.Schema.User
 
   @doc """
   Returns the list of users.
@@ -163,5 +164,30 @@ defmodule Accounts.Context.Users do
     |> Repo.get!(user_id)
     |> User.super_admin_changeset(%{super_admin: super_admin})
     |> Repo.update()
+  end
+
+  def assign_roles(%User{} = user, scope, role_ids \\ []) do
+    roles = Repo.all(from(r in Role, where: r.id in ^role_ids, where: r.scope == ^scope))
+
+    user
+    |> Repo.preload(roles: from(r in Role, where: r.scope == ^scope))
+    |> User.role_changeset(roles, length(role_ids))
+    |> Repo.update()
+  end
+
+  def user_can?(user_id, scope, permission) do
+    from(
+      u in User,
+      join: r in assoc(u, :roles),
+      join: p in assoc(r, :permissions),
+      where: u.active == true,
+      where: u.id == ^user_id,
+      where: r.active == true,
+      where: r.scope == ^scope,
+      where: p.active == true,
+      where: p.name == ^permission,
+      select: 1
+    )
+    |> Repo.exists?()
   end
 end

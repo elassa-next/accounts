@@ -2,15 +2,12 @@ defmodule Accounts.Schema.User do
   use Ecto.Schema
 
   import Ecto.Changeset
+  import Accounts.Schema.Validations
 
-  defmacro __using__(_) do
-    quote do
-      use Ecto.Schema
-
-      import Ecto.Changeset
-      import Accounts.Schema.User
-    end
-  end
+  alias Accounts.Schema.Permission.Role
+  alias Accounts.Schema.Profile.Student
+  alias Accounts.Schema.Profile.Teacher
+  alias Accounts.Schema.Profile.Admin
 
   schema "users" do
     field :username, :string
@@ -23,6 +20,15 @@ defmodule Accounts.Schema.User do
     field :confirmed_at, :naive_datetime
     field :super_admin, :boolean, default: false
 
+    has_one :admin, Admin, on_delete: :delete_all
+    has_one :teacher, Teacher, on_delete: :delete_all
+    has_one :student, Student, on_delete: :delete_all
+
+    many_to_many :roles, Role,
+      join_through: "user_roles",
+      on_delete: :delete_all,
+      on_replace: :delete
+
     timestamps()
   end
 
@@ -32,7 +38,7 @@ defmodule Accounts.Schema.User do
     |> validate_required([:username, :password])
     |> validate_format(:email, ~r/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
     |> validate_phone(:phone)
-    # |> unsafe_validate_unique([:username], Els.Repo)
+    |> unsafe_validate_unique([:username], Accounts.Repo)
     |> unique_constraint([:username])
     |> hash_password()
   end
@@ -43,7 +49,22 @@ defmodule Accounts.Schema.User do
     |> validate_required([:super_admin])
   end
 
-  def valid_password?(%{password: hashed_password}, password)
+  def role_changeset(role, roles, length) do
+    role
+    |> change()
+    |> validate_equal(:role_ids, length(roles), length)
+    |> put_assoc(:roles, roles)
+  end
+
+  def profile_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email, :phone, :image])
+    |> validate_required([:name])
+    |> validate_format(:email, ~r/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+    |> validate_phone(:phone)
+  end
+
+  def valid_password?(%Accounts.Schema.User{password: hashed_password}, password)
       when is_binary(hashed_password) and byte_size(password) > 0 do
     Bcrypt.verify_pass(password, hashed_password)
   end
@@ -53,30 +74,10 @@ defmodule Accounts.Schema.User do
     false
   end
 
-  def validate_phone(changeset, field) do
-    value = get_change(changeset, field)
-
-    if value && changeset.valid? do
-      with {:ok, phone} <- ExPhoneNumber.parse(value, "TR"),
-           true <- ExPhoneNumber.is_valid_number?(phone) do
-        changeset
-      else
-        _ ->
-          add_error(
-            changeset,
-            field,
-            "wrong number"
-          )
-      end
-    else
-      changeset
-    end
-  end
-
   defp hash_password(changeset) do
     password = get_change(changeset, :password)
 
-    if password && changeset.valid? && Mix.env() != :test do
+    if password && changeset.valid? do
       changeset
       |> validate_length(:password, max: 72, count: :bytes)
       |> delete_change(:password)
