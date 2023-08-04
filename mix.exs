@@ -24,7 +24,8 @@ defmodule Accounts.MixProject do
       {:ecto_sql, "~> 3.10"},
       {:bcrypt_elixir, "~> 3.0.1"},
       {:ex_phone_number, "~> 0.4.2"},
-      {:faker, "~> 0.17"}
+      {:faker, "~> 0.17"},
+      {:bodyguard, "~> 2.4"}
     ]
   end
 end

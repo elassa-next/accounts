@@ -46,52 +46,45 @@ defmodule Accounts.Context.Users do
       {:error, message}
 
   """
-  def find_user(params, scope, active \\ nil)
+  def find_user(params, scope \\ nil, active \\ nil)
 
   def find_user(%{username: username, password: password}, scope, active) do
     query =
-      from(
-        u in User,
-        join: p in ^scope,
-        on: u.id == p.user_id,
-        where: u.username == ^username,
-        select: u
-      )
-
-    query =
-      if not is_nil(active) do
-        query
-        |> where([u], u.active == ^active)
-      end
+      from(u in User, where: u.username == ^username)
+      |> find_user_optional_params(scope, active)
 
     with user <- Repo.one(query),
          true <- User.valid_password?(user, password) do
       {:ok, user}
     else
-      _ -> {:error, "bad_credentials"}
+      _ -> {:error, :bad_credentials}
     end
   end
 
   def find_user(%{id: id}, scope, active) do
     query =
-      from(
-        u in User,
-        join: p in ^scope,
-        on: u.id == p.user_id,
-        where: u.id == ^id
-      )
-
-    query =
-      if not is_nil(active) do
-        query
-        |> where([u], u.active == ^active)
-      end
+      from(u in User, where: u.id == ^id)
+      |> find_user_optional_params(scope, active)
 
     with %User{} = user <- Repo.one(query) do
       {:ok, user}
     else
       _ -> {:error, :not_found}
     end
+  end
+
+  defp find_user_optional_params(query, scope, active) do
+    query =
+      if not is_nil(scope) do
+        join(query, :inner, [u], p in ^scope, on: u.id == p.user_id)
+      end
+
+    query =
+      if not is_nil(active) do
+        where(query, [u], u.active == ^active)
+      end
+
+    query
   end
 
   @doc """

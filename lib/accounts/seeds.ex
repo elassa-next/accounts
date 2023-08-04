@@ -19,98 +19,98 @@ defmodule Accounts.Seeds do
     {:ok, address} =
       Addresses.create_address(%{"city_id" => city.id, "neighborhood" => "al mazoot street"})
 
-    {:ok, accounts_residence_index} =
-      Permissions.create_permission(%{"name" => "accounts_residence_index"})
+    {:ok, residence_index} =
+      Permissions.create_permission(%{"name" => "residence_index"})
 
-    {:ok, accounts_residence_create} =
-      Permissions.create_permission(%{"name" => "accounts_residence_create"})
+    {:ok, residence_create} =
+      Permissions.create_permission(%{"name" => "residence_create"})
 
-    {:ok, accounts_residence_show} =
-      Permissions.create_permission(%{"name" => "accounts_residence_show"})
+    {:ok, residence_show} =
+      Permissions.create_permission(%{"name" => "residence_show"})
 
-    {:ok, accounts_residence_update} =
-      Permissions.create_permission(%{"name" => "accounts_residence_update"})
+    {:ok, residence_update} =
+      Permissions.create_permission(%{"name" => "residence_update"})
 
-    {:ok, accounts_residence_delete} =
-      Permissions.create_permission(%{"name" => "accounts_residence_delete"})
+    {:ok, residence_delete} =
+      Permissions.create_permission(%{"name" => "residence_delete"})
 
-    {:ok, accounts_permission_index} =
-      Permissions.create_permission(%{"name" => "accounts_permission_index"})
+    {:ok, permissions_permission_index} =
+      Permissions.create_permission(%{"name" => "permissions_permission_index"})
 
-    {:ok, accounts_role_index} = Permissions.create_permission(%{"name" => "accounts_role_index"})
+    {:ok, permissions_role_index} = Permissions.create_permission(%{"name" => "permissions_role_index"})
 
-    {:ok, accounts_role_create} =
-      Permissions.create_permission(%{"name" => "accounts_role_create"})
+    {:ok, permissions_role_create} =
+      Permissions.create_permission(%{"name" => "permissions_role_create"})
 
-    {:ok, accounts_role_show} = Permissions.create_permission(%{"name" => "accounts_role_show"})
+    {:ok, permissions_role_show} = Permissions.create_permission(%{"name" => "permissions_role_show"})
 
-    {:ok, accounts_role_update} =
-      Permissions.create_permission(%{"name" => "accounts_role_update"})
+    {:ok, permissions_role_update} =
+      Permissions.create_permission(%{"name" => "permissions_role_update"})
 
-    {:ok, accounts_role_delete} =
-      Permissions.create_permission(%{"name" => "accounts_role_delete"})
+    {:ok, permissions_role_delete} =
+      Permissions.create_permission(%{"name" => "permissions_role_delete"})
 
-    {:ok, accounts_role_assign} =
-      Permissions.create_permission(%{"name" => "accounts_role_assign"})
+    {:ok, permissions_role_assign} =
+      Permissions.create_permission(%{"name" => "permissions_role_assign"})
 
-    {:ok, accounts_user_index} = Permissions.create_permission(%{"name" => "accounts_user_index"})
+    {:ok, users_index} = Permissions.create_permission(%{"name" => "users_index"})
 
-    {:ok, accounts_user_create} =
-      Permissions.create_permission(%{"name" => "accounts_user_create"})
+    {:ok, users_create} =
+      Permissions.create_permission(%{"name" => "users_create"})
 
-    {:ok, accounts_user_show} = Permissions.create_permission(%{"name" => "accounts_user_show"})
+    {:ok, users_show} = Permissions.create_permission(%{"name" => "users_show"})
 
-    {:ok, accounts_user_update} =
-      Permissions.create_permission(%{"name" => "accounts_user_update"})
+    {:ok, users_update} =
+      Permissions.create_permission(%{"name" => "users_update"})
 
-    {:ok, accounts_user_delete} =
-      Permissions.create_permission(%{"name" => "accounts_user_delete"})
+    {:ok, users_delete} =
+      Permissions.create_permission(%{"name" => "users_delete"})
 
-    {:ok, accounts_user_assign} =
-      Permissions.create_permission(%{"name" => "accounts_user_assign"})
+    {:ok, users_assign} =
+      Permissions.create_permission(%{"name" => "users_assign"})
 
-    {:ok, profile_admin_index} = Permissions.create_permission(%{"name" => "profile_admin_index"})
+    {:ok, profiles_admin_index} = Permissions.create_permission(%{"name" => "profiles_admin_index"})
 
-    {:ok, profile_admin_create} =
-      Permissions.create_permission(%{"name" => "profile_admin_create"})
+    {:ok, profiles_admin_create} =
+      Permissions.create_permission(%{"name" => "profiles_admin_create"})
 
-    {:ok, profile_admin_show} = Permissions.create_permission(%{"name" => "profile_admin_show"})
+    {:ok, profiles_admin_show} = Permissions.create_permission(%{"name" => "profiles_admin_show"})
 
-    {:ok, profile_admin_update} =
-      Permissions.create_permission(%{"name" => "profile_admin_update"})
+    {:ok, profiles_admin_update} =
+      Permissions.create_permission(%{"name" => "profiles_admin_update"})
 
-    {:ok, profile_admin_delete} =
-      Permissions.create_permission(%{"name" => "profile_admin_delete"})
+    {:ok, profiles_admin_delete} =
+      Permissions.create_permission(%{"name" => "profiles_admin_delete"})
 
-    {:ok, profile_teacher_index} =
-      Permissions.create_permission(%{"name" => "profile_teacher_index"})
+    {:ok, profiles_teacher_index} =
+      Permissions.create_permission(%{"name" => "profiles_teacher_index"})
 
-    {:ok, profile_teacher_create} =
-      Permissions.create_permission(%{"name" => "profile_teacher_create"})
+    {:ok, profiles_teacher_create} =
+      Permissions.create_permission(%{"name" => "profiles_teacher_create"})
 
-    {:ok, profile_teacher_show} =
-      Permissions.create_permission(%{"name" => "profile_teacher_show"})
+    {:ok, profiles_teacher_show} =
+      Permissions.create_permission(%{"name" => "profiles_teacher_show"})
 
-    {:ok, profile_teacher_update} =
-      Permissions.create_permission(%{"name" => "profile_teacher_update"})
+    {:ok, profiles_teacher_update} =
+      Permissions.create_permission(%{"name" => "profiles_teacher_update"})
 
-    {:ok, profile_teacher_delete} =
-      Permissions.create_permission(%{"name" => "profile_teacher_delete"})
+    {:ok, profiles_teacher_delete} =
+      Permissions.create_permission(%{"name" => "profiles_teacher_delete"})
 
-    {:ok, profile_student_index} =
-      Permissions.create_permission(%{"name" => "profile_student_index"})
+    {:ok, profiles_student_index} =
+      Permissions.create_permission(%{"name" => "profiles_student_index"})
 
-    {:ok, profile_student_create} =
-      Permissions.create_permission(%{"name" => "profile_student_create"})
+    {:ok, profiles_student_create} =
+      Permissions.create_permission(%{"name" => "profiles_student_create"})
 
-    {:ok, profile_student_show} =
-      Permissions.create_permission(%{"name" => "profile_student_show"})
+    {:ok, profiles_student_show} =
+      Permissions.create_permission(%{"name" => "profiles_student_show"})
 
-    {:ok, profile_student_update} =
-      Permissions.create_permission(%{"name" => "profile_student_update"})
+    {:ok, profiles_student_update} =
+      Permissions.create_permission(%{"name" => "profiles_student_update"})
 
-    {:ok, profile_student_delete} =
-      Permissions.create_permission(%{"name" => "profile_student_delete"})
+    {:ok, profiles_student_delete} =
+      Permissions.create_permission(%{"name" => "profiles_student_delete"})
 
     {:ok, admin_role} =
       Roles.create_role(%{
@@ -131,45 +131,45 @@ defmodule Accounts.Seeds do
       })
 
     Roles.assign_permissions(admin_role, [
-      accounts_residence_index.id,
-      accounts_residence_create.id,
-      accounts_residence_show.id,
-      accounts_residence_update.id,
-      accounts_residence_delete.id,
+      residence_index.id,
+      residence_create.id,
+      residence_show.id,
+      residence_update.id,
+      residence_delete.id,
       ######
-      accounts_permission_index.id,
+      permissions_permission_index.id,
       ######
-      accounts_role_index.id,
-      accounts_role_create.id,
-      accounts_role_show.id,
-      accounts_role_update.id,
-      accounts_role_delete.id,
-      accounts_role_assign.id,
+      permissions_role_index.id,
+      permissions_role_create.id,
+      permissions_role_show.id,
+      permissions_role_update.id,
+      permissions_role_delete.id,
+      permissions_role_assign.id,
       ######
-      accounts_user_index.id,
-      accounts_user_create.id,
-      accounts_user_show.id,
-      accounts_user_update.id,
-      accounts_user_delete.id,
-      accounts_user_assign.id,
+      users_index.id,
+      users_create.id,
+      users_show.id,
+      users_update.id,
+      users_delete.id,
+      users_assign.id,
       ######
-      profile_admin_index.id,
-      profile_admin_create.id,
-      profile_admin_show.id,
-      profile_admin_update.id,
-      profile_admin_delete.id,
+      profiles_admin_index.id,
+      profiles_admin_create.id,
+      profiles_admin_show.id,
+      profiles_admin_update.id,
+      profiles_admin_delete.id,
       ######
-      profile_teacher_index.id,
-      profile_teacher_create.id,
-      profile_teacher_show.id,
-      profile_teacher_update.id,
-      profile_teacher_delete.id,
+      profiles_teacher_index.id,
+      profiles_teacher_create.id,
+      profiles_teacher_show.id,
+      profiles_teacher_update.id,
+      profiles_teacher_delete.id,
       ######
-      profile_student_index.id,
-      profile_student_create.id,
-      profile_student_show.id,
-      profile_student_update.id,
-      profile_student_delete.id
+      profiles_student_index.id,
+      profiles_student_create.id,
+      profiles_student_show.id,
+      profiles_student_update.id,
+      profiles_student_delete.id
     ])
 
     {:ok, admin_user} =
