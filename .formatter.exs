@@ -20,7 +20,10 @@ export_locals_without_parens = [
   many_to_many: 2,
   many_to_many: 3,
   many_to_many: 4,
-  many_to_many: 5
+  many_to_many: 5,
+  plug: 1,
+  plug: 2,
+  plug: 3
 ]
 
 [

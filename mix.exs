@@ -25,7 +25,10 @@ defmodule Accounts.MixProject do
       {:bcrypt_elixir, "~> 3.0.1"},
       {:ex_phone_number, "~> 0.4.2"},
       {:faker, "~> 0.17"},
-      {:bodyguard, "~> 2.4"}
+      {:bodyguard, "~> 2.4"},
+      {:guardian, "~> 2.0"},
+      {:jason, "~> 1.2"},
+      {:plug_cowboy, "~> 2.5"}
     ]
   end
 end
