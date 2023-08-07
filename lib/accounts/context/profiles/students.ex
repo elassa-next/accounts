@@ -1,6 +1,7 @@
 defmodule Accounts.Context.Profiles.Students do
   import Ecto.Query, warn: false
 
+  alias Accounts.Schema.Permission.Role
   alias Accounts.Repo
   alias Accounts.Constants
   alias Accounts.Schema.Profile.Student

@@ -1,5 +1,6 @@
 defmodule Accounts.Guardian.SubjectClaims do
-  use Guardian, otp_app: :accounts
+  use Guardian,
+    otp_app: Application.get_env(:accounts, :otp_app)
 
   alias Accounts.Context.Users
 

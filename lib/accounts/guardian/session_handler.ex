@@ -1,4 +1,4 @@
-defmodule ElsWeb.Guardian.SessionHandler do
+defmodule Accounts.Guardian.SessionHandler do
   import Accounts.Changeset
 
   alias Accounts.Context.Users

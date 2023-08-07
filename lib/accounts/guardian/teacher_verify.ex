@@ -1,6 +1,6 @@
 defmodule Accounts.Guardian.TeacherVerify do
   use Guardian.Plug.Pipeline,
-    otp_app: :accounts,
+    otp_app: Application.get_env(:accounts, :otp_app),
     module: Accounts.Guardian.SubjectClaims,
     error_handler: Accounts.Guardian.AuthErrorHandler
 

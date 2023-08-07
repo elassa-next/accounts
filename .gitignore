@@ -24,6 +24,3 @@ accounts-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
-
-priv/private.pem
-priv/public.pem

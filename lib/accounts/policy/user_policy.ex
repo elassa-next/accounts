@@ -1,4 +1,4 @@
-defmodule Accounts.Policy.User do
+defmodule Accounts.Policy.UserPolicy do
   @behaviour Bodyguard.Policy
 
   import Accounts.Context.Users, only: [user_can?: 3]
