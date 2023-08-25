@@ -1,6 +1,7 @@
 defmodule Accounts.Context.Users do
   import Ecto.Query, warn: false
 
+  alias Accounts.Filter
   alias Accounts.Schema.Permission.Role
   alias Accounts.Repo
   alias Accounts.Schema.User
@@ -74,17 +75,11 @@ defmodule Accounts.Context.Users do
   end
 
   defp find_user_optional_params(query, scope, active) do
-    query =
-      if not is_nil(scope) do
-        join(query, :inner, [u], p in ^scope, on: u.id == p.user_id)
-      end
-
-    query =
-      if not is_nil(active) do
-        where(query, [u], u.active == ^active)
-      end
-
     query
+    |> Filter.optional(scope, fn q ->
+      join(q, :inner, [u], p in ^scope, on: u.id == p.user_id)
+    end)
+    |> Filter.optional(active, fn q -> where(q, [u], u.active == ^active) end)
   end
 
   @doc """
